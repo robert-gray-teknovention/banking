@@ -31,11 +31,12 @@ def calculate_interest():
             transaction_obj = Transaction(
                 account=account,
                 transaction_type=INTEREST,
-                amount=interest
+                amount=interest,
+                balance_after_transaction=account.balance
             )
             created_transactions.append(transaction_obj)
             updated_accounts.append(account)
-
+    print("Created transactions", len(created_transactions))
     if created_transactions:
         Transaction.objects.bulk_create(created_transactions)
 
@@ -43,3 +44,8 @@ def calculate_interest():
         UserBankAccount.objects.bulk_update(
             updated_accounts, ['balance']
         )
+
+
+@task(name="test_print")
+def test_print():
+    print("We are running a test print routine")

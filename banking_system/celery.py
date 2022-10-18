@@ -23,8 +23,13 @@ app.conf.beat_schedule = {
     'calculate_interest': {
         'task': 'calculate_interest',
         # http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
-        'schedule': crontab(0, 0, day_of_month='1'),
-    }
+        'schedule': crontab(0, 0, day_of_month='14'),
+    },
+    'test_print_10secs': {
+        'task': 'test_print',
+        'schedule': 10.0
+    },
+
 }
 
 
